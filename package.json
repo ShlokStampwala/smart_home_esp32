@@ -7,6 +7,6 @@
     "start": "npx netlify dev"
   },
   "dependencies": {
-    "@groq/groq-sdk": "^0.3.3"
+    "groq-sdk": "^0.3.3"
   }
 }
