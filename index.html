@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMART HOME SYSTEM - AI-Powered IoT Smart Home Automation</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="dark-mode">
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-container">
+                <span class="logo-icon">🏠</span>
+                <div class="title-wrapper">
+                    <h1>SMART HOME SYSTEM</h1>
+                    <span class="subtitle">AI-Powered IoT Smart Home Automation</span>
+                </div>
+            </div>
+            <div class="header-right-controls">
+                <button id="btn-theme-toggle" class="btn-theme-toggle" onclick="toggleTheme()" title="Toggle Light / Dark Theme">
+                    <span id="theme-toggle-icon">🌙</span>
+                </button>
+                <div class="connection-status" id="connection-status-badge">
+                    <span class="status-dot connecting"></span>
+                    <span class="status-text">CONNECTING...</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="dashboard">
+            <!-- Connection Card -->
+            <section class="card connection-card">
+                <h2>ESP32 CONNECTION</h2>
+                <div class="connection-details">
+                    <div class="detail-row">
+                        <span>Hostname:</span>
+                        <input type="text" id="esp32-hostname" value="smart-home.local" disabled>
+                    </div>
+                    <div class="detail-row">
+                        <span>IP Address:</span>
+                        <input type="text" id="esp32-ip" placeholder="192.168.x.x">
+                    </div>
+                </div>
+                <div class="card-actions">
+                    <button id="btn-auto-discover" class="btn secondary">AUTO DISCOVER</button>
+                    <button id="btn-connect" class="btn primary">CONNECT</button>
+                </div>
+            </section>
+
+            <!-- Rain Sensor Card -->
+            <section class="card rain-card" id="rain-status-card">
+                <div class="card-header">
+                    <h2>🌧️ RAIN STATUS</h2>
+                    <span class="badge" id="rain-badge">DRY</span>
+                </div>
+                <div class="sensor-readings">
+                    <div class="reading">
+                        <span class="label">Sensor Value</span>
+                        <span class="value" id="rain-value">--</span>
+                    </div>
+                    <div class="reading">
+                        <span class="label">Threshold</span>
+                        <span class="value" id="rain-threshold-display">--</span>
+                    </div>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-labels">
+                        <span>Rain Level</span>
+                        <span id="rain-level-pct">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="rain-level-fill" style="width: 0%;"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Rack Control Card -->
+            <section class="card rack-card" id="rack-card">
+                <div class="card-header">
+                    <h2>👕 CLOTHES RACK</h2>
+                    <span class="badge" id="rack-position-badge">UNKNOWN</span>
+                </div>
+                <div class="visual-indicator">
+                    <div class="rack-icon" id="rack-icon">👕</div>
+                </div>
+                <div class="card-actions double">
+                    <button id="btn-rack-inside" class="btn action">MOVE INSIDE</button>
+                    <button id="btn-rack-outside" class="btn action">MOVE OUTSIDE</button>
+                </div>
+            </section>
+
+            <!-- Fan Control Card -->
+            <section class="card fan-card" id="fan-card">
+                <div class="card-header">
+                    <h2>🌀 FAN</h2>
+                    <span class="badge" id="fan-status-badge">OFF</span>
+                </div>
+                <div class="visual-indicator">
+                    <div class="fan-icon" id="fan-icon">🌀</div>
+                </div>
+                <div class="card-actions double">
+                    <button id="btn-fan-on" class="btn action">TURN ON</button>
+                    <button id="btn-fan-off" class="btn action">TURN OFF</button>
+                </div>
+            </section>
+
+            <!-- LED Control Card -->
+            <section class="card led-card" id="led-card">
+                <div class="card-header">
+                    <h2>💡 STATUS LED</h2>
+                    <span class="badge" id="led-status-badge">OFF</span>
+                </div>
+                <div class="visual-indicator">
+                    <div class="led-icon" id="led-icon">●</div>
+                </div>
+                <div class="card-actions double">
+                    <button id="btn-led-on" class="btn action">TURN ON</button>
+                    <button id="btn-led-off" class="btn action">TURN OFF</button>
+                </div>
+            </section>
+
+            <!-- AI Assistant Card -->
+            <section class="card ai-card">
+                <div class="card-header">
+                    <h2>🤖 AI ASSISTANT</h2>
+                    <div class="lang-select-wrapper">
+                        <select id="voice-lang-select" class="lang-select">
+                            <option value="gu-IN">ગુજરાતી (Gujarati)</option>
+                            <option value="hi-IN" selected>हिंदी / Hinglish</option>
+                            <option value="en-US">English</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="chat-container">
+                    <div class="chat-input-wrapper">
+                        <input type="text" id="ai-command-input" placeholder="Type or speak a command... (e.g. 'પંખો ચાલુ કરો' / 'Fan on karo')">
+                        <button id="btn-voice" class="btn-icon" title="Voice Command">🎤</button>
+                        <button id="btn-send-ai" class="btn primary">SEND</button>
+                    </div>
+                    <div id="voice-status" class="voice-status hidden">Listening...</div>
+                </div>
+            </section>
+
+            <!-- Activity Log -->
+            <section class="card log-card">
+                <div class="card-header">
+                    <h2>📋 ACTIVITY LOG</h2>
+                    <button id="btn-clear-log" class="btn-small">Clear</button>
+                </div>
+                <div class="log-container" id="activity-log">
+                    <!-- Log entries will be added here -->
+                </div>
+            </section>
+
+            <!-- Settings -->
+            <section class="card settings-card">
+                <div class="card-header">
+                    <h2>⚙️ SETTINGS</h2>
+                </div>
+                <div class="settings-form">
+                    <div class="form-group">
+                        <label for="setting-rain-threshold">Rain Threshold</label>
+                        <input type="number" id="setting-rain-threshold" value="600">
+                    </div>
+                    <div class="form-group">
+                        <label for="setting-rack-inside">Inside Servo Angle (°)</label>
+                        <input type="number" id="setting-rack-inside" value="30">
+                    </div>
+                    <div class="form-group">
+                        <label for="setting-rack-outside">Outside Servo Angle (°)</label>
+                        <input type="number" id="setting-rack-outside" value="150">
+                    </div>
+                    <button id="btn-save-settings" class="btn primary full-width">SAVE SETTINGS</button>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Toast Notification Container -->
+        <div id="toast-container" class="toast-container"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/events.js"></script>
+    <script src="js/commands.js"></script>
+    <script src="js/esp32.js"></script>
+    <script src="js/ai.js"></script>
+    <script src="js/voice.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

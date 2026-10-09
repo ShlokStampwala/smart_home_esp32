@@ -1,0 +1,12 @@
+{
+  "name": "rain-guard-ai",
+  "version": "1.0.0",
+  "description": "AI-Powered Smart Rain Protection System",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx netlify dev"
+  },
+  "dependencies": {
+    "@groq/groq-sdk": "^0.3.3"
+  }
+}

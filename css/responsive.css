@@ -1,0 +1,110 @@
+/* Mobile-First Responsive Adjustments */
+
+@media (max-width: 600px) {
+    .app-container {
+        padding: 12px;
+    }
+
+    .header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .header-right-controls {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .title-wrapper h1 {
+        font-size: 1.25rem;
+    }
+
+    .subtitle {
+        font-size: 0.75rem;
+    }
+
+    .card {
+        padding: 16px;
+        border-radius: var(--radius-md);
+    }
+
+    .card h2 {
+        font-size: 1rem;
+    }
+
+    /* Mobile Touch Targets (Minimum 44px-48px height) */
+    .btn {
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.95rem;
+    }
+
+    .btn-icon {
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .chat-input-wrapper {
+        flex-wrap: wrap;
+    }
+
+    .chat-input-wrapper input {
+        width: 100%;
+        min-height: 44px;
+        font-size: 1rem; /* Prevents auto-zoom on iOS */
+    }
+
+    .chat-input-wrapper .btn-icon,
+    .chat-input-wrapper .btn {
+        flex: 1;
+    }
+
+    .card-actions.double {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .visual-indicator {
+        height: 70px;
+        font-size: 2.5rem;
+    }
+
+    .sensor-readings {
+        gap: 10px;
+    }
+
+    .reading .value {
+        font-size: 1.25rem;
+    }
+
+    .toast-container {
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+    }
+
+    .toast {
+        min-width: unset;
+        width: 100%;
+    }
+}
+
+/* Very Small Screens (e.g. older Android phones, 360px and below) */
+@media (max-width: 380px) {
+    .logo-icon {
+        font-size: 1.6rem;
+    }
+
+    .title-wrapper h1 {
+        font-size: 1.1rem;
+    }
+}
