@@ -9,8 +9,7 @@ class AIManager {
         
         logEvent('AI Command', text);
         EventBus.emit('ai_processing_start');
-        
-        const localApiKey = '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';
+        const localApiKey = localStorage.getItem('groq_api_key') || '';
 
         // 1. Direct Groq Cloud API Call (Using recommended replacement models)
         if (localApiKey) {
